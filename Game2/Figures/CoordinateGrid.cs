@@ -40,6 +40,10 @@ namespace Game2.Figures
             {
                 line.ApplyTransform(transform);
             }
+            foreach (var line in _axises)
+            {
+                line.ApplyTransform(transform);
+            }
         }
 
         public void Draw(SpriteBatch batch)
@@ -107,7 +111,7 @@ namespace Game2.Figures
 
         private void CreateGrid()
         {
-            _gridVertical = new Line[(int)(Width / Unit) * 2];
+            _gridVertical = new Line[(int)(Width / Unit) + 1];
             for (int i = 0; i < _gridVertical.Length; i++)
             {
                 var X = i * Unit;
