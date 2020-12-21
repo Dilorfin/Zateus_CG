@@ -320,9 +320,12 @@ namespace Game2.GUI
                 grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
             }
             
-            AddParam(grid, 0, "L4");
-            AddParam(grid, 1, "R1");
-            AddParam(grid, 2, "R2");
+            AddParam(grid, 1, "L1");
+            AddParam(grid, 2, "L2");
+            AddParam(grid, 3, "L3");
+            AddParam(grid, 4, "L4");
+            AddParam(grid, 5, "R1");
+            AddParam(grid, 6, "R2");
 
             _parametersWindow.Content = grid;
         }

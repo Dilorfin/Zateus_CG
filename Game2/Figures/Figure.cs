@@ -16,10 +16,10 @@ namespace Game2.Figures
 
         private Circle _tempCircle;
 
-        private float _l4;
         private float _l1;
         private float _l2;
         private float _l3;
+        private float _l4;
         private float _r1;
         private float _r2;
 
@@ -32,6 +32,7 @@ namespace Game2.Figures
                     return;
 
                 _l1 = value;
+                BuildLine();
             }
         }
 
@@ -44,6 +45,7 @@ namespace Game2.Figures
                     return;
 
                 _l2 = value;
+                BuildLine();
             }
         }
 
@@ -56,6 +58,7 @@ namespace Game2.Figures
                     return;
 
                 _l3 = value;
+                BuildLine();
             }
         }
 
@@ -91,6 +94,9 @@ namespace Game2.Figures
             set
             {
                 if (_transformed)
+                    return;
+                
+                if (value > L3-L2-R1 || value < L4+R1)
                     return;
 
                 _r2 = value;
