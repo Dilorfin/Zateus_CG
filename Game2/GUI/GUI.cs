@@ -179,7 +179,45 @@ namespace Game2.GUI
 
         void CreateAffineWindow()
         {
-            _affineWindow = new Window();
+            _affineWindow = new Window
+            {
+                Title = "Affine"
+            };
+
+            Grid grid = new Grid();
+            grid.ColumnsProportions.Add(new Proportion(ProportionType.Auto));
+            grid.ColumnsProportions.Add(new Proportion(ProportionType.Auto));
+            grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+            grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+            grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+            grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+            grid.RowsProportions.Add(new Proportion(ProportionType.Auto));
+
+            var r0Param = AddPointParam(grid, "r0", 0);
+            var rXParam = AddPointParam(grid, "rX", 2);
+            var rYParam = AddPointParam(grid, "rY", 4);
+
+            var button = new TextButton
+            {
+                Text = "Apply",
+                GridRow = 6
+            };
+
+            button.Click += (sender, args) =>
+            {
+                Transform transform = new Transform();
+
+                var r0 = new Vector3(float.Parse(r0Param.Item1.Text), float.Parse(r0Param.Item2.Text), 0);
+                var rX = new Vector3(float.Parse(rXParam.Item1.Text), float.Parse(rXParam.Item2.Text), 0);
+                var rY = new Vector3(float.Parse(rYParam.Item1.Text), float.Parse(rYParam.Item2.Text), 0);
+                transform.Affine(r0, rX, rY);
+                
+                _figure.ApplyTransform(transform);
+            };
+            
+            grid.Widgets.Add(button);
+            
+            _affineWindow.Content = grid;
         }
 
         void CreateHomographyWindow()
