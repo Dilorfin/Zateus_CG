@@ -12,7 +12,8 @@ namespace Game2.Figures
         public int Height { get; }
 
         private readonly Line[] _axises = new Line[6];
-        
+        private readonly Line[] _letters = new Line[5];
+
         private Line[] _gridVertical;
         private Line[] _gridHorizontal;
 
@@ -44,6 +45,11 @@ namespace Game2.Figures
             {
                 line.ApplyTransform(transform);
             }
+            foreach (var line in _letters)
+            {
+                line.ApplyTransform(transform);
+            }
+
         }
 
         public void Draw(SpriteBatch batch)
@@ -60,12 +66,17 @@ namespace Game2.Figures
             {
                 line.Draw(batch);
             }
+            foreach (var line in _letters)
+            {
+                line.Draw(batch);
+            }
         }
 
         public void Reset()
         {
             CreateGrid();
             CreateArrows();
+            CreateLetters();
         }
         
         private void CreateArrows()
@@ -108,7 +119,43 @@ namespace Game2.Figures
                 line.Color = _arrowsColor;
             }
         }
+        private void CreateLetters()
+        {
+            Vector3[] xLetter = new Vector3[4];
+            Vector3[] yLetter = new Vector3[4];
 
+            float offset = Unit / 2;
+
+            xLetter[0].X = Width - Unit * 2;
+            xLetter[0].Y = Center.Y - offset * 3;
+            xLetter[1].X = Width - Unit;
+            xLetter[1].Y = Center.Y - offset;
+            xLetter[2].X = Width - Unit;
+            xLetter[2].Y = Center.Y - offset * 3;
+            xLetter[3].X = Width - Unit * 2;
+            xLetter[3].Y = Center.Y - offset;
+
+            yLetter[0].X = Center.X + Unit;
+            yLetter[0].Y = Height;
+            yLetter[1].X = Center.X + Unit;
+            yLetter[1].Y = Height - offset;
+            yLetter[2].X = Center.X + offset;
+            yLetter[2].Y = Height - Unit;
+            yLetter[3].X = Center.X + Unit + offset;
+            yLetter[3].Y = Height - Unit;
+
+            _letters[0] = new Line(xLetter[0], xLetter[1]);
+            _letters[1] = new Line(xLetter[2], xLetter[3]);
+
+            _letters[2] = new Line(yLetter[0], yLetter[1]);
+            _letters[3] = new Line(yLetter[1], yLetter[2]);
+            _letters[4] = new Line(yLetter[1], yLetter[3]);
+            foreach (var line in _letters)
+            {
+                line.Thickness = 2;
+                line.Color = _arrowsColor;
+            }
+        }
         private void CreateGrid()
         {
             _gridVertical = new Line[(int)(Width / Unit) + 1];

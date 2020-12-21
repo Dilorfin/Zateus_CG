@@ -30,7 +30,8 @@ namespace Game2.Figures
             {
                 if (_transformed)
                     return;
-
+                if (value < 0 || value > L3 - L2)
+                    return;
                 _l1 = value;
                 BuildLine();
             }
@@ -43,7 +44,8 @@ namespace Game2.Figures
             {
                 if (_transformed)
                     return;
-
+                if (value < 0 || value > L1)
+                    return;
                 _l2 = value;
                 BuildLine();
             }
@@ -56,7 +58,8 @@ namespace Game2.Figures
             {
                 if (_transformed)
                     return;
-
+                if (value < R2 + R1 + L1)
+                    return;
                 _l3 = value;
                 BuildLine();
             }
@@ -70,6 +73,8 @@ namespace Game2.Figures
                 if (_transformed || value < 1)
                     return;
 
+                if (value > R2 - R1)
+                    return;
                 _l4 = value;
                 BuildRhombus();
             }
@@ -81,6 +86,9 @@ namespace Game2.Figures
             set
             {
                 if (_transformed)
+                    return;
+
+                if (value > L3 - L2 - R2 || value > R2 - L4)
                     return;
 
                 _r1 = value;
@@ -95,8 +103,8 @@ namespace Game2.Figures
             {
                 if (_transformed)
                     return;
-                
-                if (value > L3-L2-R1 || value < L4+R1)
+
+                if (value > L3 - L2 - R1 || value < L4 + R1)
                     return;
 
                 _r2 = value;
