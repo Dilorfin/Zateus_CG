@@ -14,7 +14,8 @@ namespace Game2
         private Figure _figure;
 
         private CoordinateGrid _grid;
-
+        const int Unit = 12;
+        
         private Gui _gui;
         
         public Game1()
@@ -28,10 +29,10 @@ namespace Game2
         {
             MyraEnvironment.Game = this;
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            _grid = new CoordinateGrid(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, Unit);
 
-            _grid = new CoordinateGrid(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, 12);
-
-            _figure = new Figure(_grid.Center, _grid.Unit);
+            _figure = new Figure(_grid);
 
             _gui = new Gui(_figure, _grid);
         }

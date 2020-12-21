@@ -1,11 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Game2.Figures
 {
     public class PolyLine
     {
-        private readonly Vector3[] _vectors;
+        private Vector3[] _vectors;
         
         public bool IsEnclosed { get; set; }
         
@@ -29,6 +30,15 @@ namespace Game2.Figures
             for (int i = 0; i < _vectors.Length; i++)
             {
                 _vectors[i] = transform.Multiply(_vectors[i]);
+            }
+        }
+
+        public void Append(Vector3[] points)
+        {
+            Array.Resize(ref _vectors, _vectors.Length+points.Length);
+            for (int i = 0; i < points.Length; i++)
+            {
+                _vectors[_vectors.Length - i - 1] = points[points.Length - i - 1];
             }
         }
         

@@ -21,6 +21,8 @@ namespace Game2.Figures
 
         public Vector3 Center { get; private set; }
 
+        public Color Color { get; set; } = Color.Black;
+        
         public Circle(float radius, Vector3 center, int numberOfPoints = 100)
         {
             _vectors = new Vector3[numberOfPoints];
@@ -43,10 +45,10 @@ namespace Game2.Figures
         {
             for (int i = 0; i < _vectors.Length - 1; i++)
             {
-                spriteBatch.DrawLine(_vectors[i], _vectors[i + 1], Color.Black, 2f);
+                spriteBatch.DrawLine(_vectors[i], _vectors[i + 1], Color, 2f);
             }
 
-            spriteBatch.DrawLine(_vectors[^1], _vectors[0], Color.Black, 2f);
+            spriteBatch.DrawLine(_vectors[^1], _vectors[0], Color, 2f);
         }
 
         private void Build()
