@@ -213,6 +213,7 @@ namespace Game2.GUI
                 transform.Affine(r0, rX, rY);
                 
                 _figure.ApplyTransform(transform);
+                _coordinateGrid.ApplyTransform(transform);
             };
             
             grid.Widgets.Add(button);
@@ -297,6 +298,7 @@ namespace Game2.GUI
                 transform.Move(_coordinateGrid.Center);
                 
                 _figure.ApplyTransform(transform);
+                _coordinateGrid.ApplyTransform(transform);
             };
             
             grid.Widgets.Add(button);

@@ -124,11 +124,36 @@ namespace Game2
         }
         public void Affine(Vector3 r0, Vector3 rX, Vector3 rY)
         {
-            throw new NotImplementedException();
+            Transform affine = new Transform();
+            affine[0] = rX.X;
+            affine[1] = rX.Y;
+		
+            affine[4] = rY.X;
+            affine[5] = rY.Y;
+
+            affine[12] = r0.X;
+            affine[13] = r0.Y;
+            this.Combine(affine);
         }
         public void Homography(Vector3 r0, Vector3 rX, Vector3 rY, Vector3 w)
         {
-            throw new NotImplementedException();
+            Transform homography = new Transform();
+            homography[0] = rX.X * w.X;
+            homography[1] = rX.Y * w.X;
+            homography[3] = w.X;
+		
+            homography[4] = rY.X * w.Y;
+            homography[5] = rY.Y * w.Y;
+            homography[7] = w.Y;
+
+            homography[10] = 1;
+            homography[11] = 1;
+		
+            homography[12] = r0.X;
+            homography[13] = r0.Y;
+            homography[15] = w.Z;
+
+            this.Combine(homography);
         }
     }
 }
