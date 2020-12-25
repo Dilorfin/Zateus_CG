@@ -22,7 +22,7 @@ namespace Game2.Figures
 
         public CoordinateGrid(int width, int height, float unit)
         {
-            Center = new Vector3(unit * (int)((width / unit) / 2), unit * (int)((height / unit) / 2), 0);
+            Center = new Vector3(0,0, 0);
             Unit = unit;
 
             Width = width;
@@ -158,20 +158,20 @@ namespace Game2.Figures
         }
         private void CreateGrid()
         {
-            _gridVertical = new Line[(int)(Width / Unit) + 1];
+            _gridVertical = new Line[((int)(Width / Unit) + 1)* 2];
             for (int i = 0; i < _gridVertical.Length; i++)
             {
-                var X = i * Unit;
-                _gridVertical[i] = new Line(new Vector3(X, 0, 0), new Vector3(X, Height, 0))
+                var X = (i -_gridVertical.Length/2)* Unit;
+                _gridVertical[i] = new Line(new Vector3(X, -Height, 0), new Vector3(X, Height, 0))
                 {
                     Color = _gridColor
                 };
             }
-            _gridHorizontal = new Line[(int)(Height / Unit) + 1];
+            _gridHorizontal = new Line[((int)(Height / Unit) + 1) * 2];
             for (int i = 0; i < _gridHorizontal.Length; i++)
             {
-                var Y = i * Unit;
-                _gridHorizontal[i] = new Line(new Vector3(0, Y, 0), new Vector3(Width, Y, 0))
+                var Y = (i - _gridHorizontal.Length / 2) * Unit;
+                _gridHorizontal[i] = new Line(new Vector3(-Width, Y, 0), new Vector3(Width, Y, 0))
                 {
                     Color = _gridColor
                 };

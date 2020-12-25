@@ -181,10 +181,10 @@ namespace Game2.Figures
             Transform transform = new Transform();
             transform.Rotate(new Vector3(0, 0, i * (360f / n)), _grid.Center);
 
-            points[0] = transform.Multiply(new Vector3(_grid.Center.X + L3 - L2, _grid.Center.Y + L1 / 2, 0));
-            points[1] = transform.Multiply(new Vector3(_grid.Center.X + L3, _grid.Center.Y + L1 / 2, 0));
-            points[2] = transform.Multiply(new Vector3(_grid.Center.X + L3, _grid.Center.Y - L1 / 2, 0));
-            points[3] = transform.Multiply(new Vector3(_grid.Center.X + L3 - L2, _grid.Center.Y - L1 / 2, 0));
+            points[3] = transform.Multiply(new Vector3(_grid.Center.X + L3 - L2, _grid.Center.Y + L1 / 2, 0));
+            points[2] = transform.Multiply(new Vector3(_grid.Center.X + L3, _grid.Center.Y + L1 / 2, 0));
+            points[1] = transform.Multiply(new Vector3(_grid.Center.X + L3, _grid.Center.Y - L1 / 2, 0));
+            points[0] = transform.Multiply(new Vector3(_grid.Center.X + L3 - L2, _grid.Center.Y - L1 / 2, 0));
 
             _line.Append(points);
         }

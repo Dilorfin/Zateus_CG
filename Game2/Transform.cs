@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Microsoft.Xna.Framework;
 
 namespace Game2
@@ -14,8 +15,8 @@ namespace Game2
 
         private float this[int index]
         {
-            get => _matrix[index % 4, index / 4];
-            set => _matrix[index % 4, index / 4] = value;
+            get => _matrix[index / 4, index % 4];
+            set => _matrix[index / 4, index % 4] = value;
         }
 
         public void Combine(Transform transform)
@@ -39,6 +40,20 @@ namespace Game2
                 }
             }
             return multiply;
+        }
+        public override string  ToString()
+        {
+            StringBuilder b = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {   
+                    b.Append(_matrix[i,j]);
+                    b.Append(" ");
+                }
+                b.AppendLine();
+            }
+            return b.ToString();
         }
         public Vector3 Multiply(Vector3 point)
         {
@@ -139,20 +154,20 @@ namespace Game2
         {
             Transform homography = new Transform();
             homography[0] = rX.X * w.X;
-            homography[1] = rX.Y * w.X;
+            homography[1] = rY.X * w.X;
             homography[3] = w.X;
 		
-            homography[4] = rY.X * w.Y;
+            homography[4] = rX.Y * w.Y;
             homography[5] = rY.Y * w.Y;
             homography[7] = w.Y;
 
             homography[10] = 1;
             homography[11] = 1;
 		
-            homography[12] = r0.X;
-            homography[13] = r0.Y;
+            homography[12] = r0.X*w.Z;
+            homography[13] = r0.Y*w.Z;
             homography[15] = w.Z;
-
+            
             this.Combine(homography);
         }
     }
